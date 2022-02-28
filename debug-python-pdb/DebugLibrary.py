@@ -19,6 +19,7 @@ class DebugLibrary:
         has_failed = BuiltIn().get_variable_value("${SUITE_STATUS}") == 'FAIL'
         if self.__is_debug_mode and has_failed:
             self.__import_required_libraries()
+            self.set_breakpoint()
             BuiltIn().run_keyword("Pause Execution", "Paused due to task failure, click OK to continue teardown")
 
     # Lets us pause using the Dialog library without dropping to `pdb`
@@ -29,7 +30,7 @@ class DebugLibrary:
 
     # Helper for letting us print out the current variables inside of `pdb`
     # Ex. `self.__print_variables()`
-    def _print_variables(self):
+    def print_variables(self):
         # TODO: Recursively dump the NormalizedDict and optionally hide secrets
         variables = {k: v for k, v in BuiltIn().get_variables().items()}
         pprint.pprint(variables)

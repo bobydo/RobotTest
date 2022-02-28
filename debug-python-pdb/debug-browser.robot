@@ -20,10 +20,12 @@ Open Bing
 Perform Search
     [Arguments]    ${query}
     Wait Until Element Is Visible    name:q
-    Set Breakpoint
-    Input Text    name:q  ${query}
+    #def set_breakpoint(self):
+    #Set Breakpoint
+    #Input Text    name:q  ${query} # will work
+    Input Text    name:inputfield  ${query} # will failure
     Submit Form    //form[@id="sb_form"]
-    Pause For Debug
+    Pause ON FAILURE
 
 *** Test Cases ***
 Search Bing
